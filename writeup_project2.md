@@ -26,7 +26,17 @@ The goals / steps of this project are the following:
 [image4]: ./output_images/lanes_test4.jpg            "Lanes"
 [image5]: ./output_images/warp_back_test4.jpg        "Final"
 [image6]: ./output_images/thresh_with_mask_test4.png "Threshold_with_mask"
+
+[image7]: ./output_images/P2_imageout_4.png "P2.ipynb images 1-4"
+[image8]: ./output_images/P2_imageout_8.png "P2.ipynb images 5-8"
+
 [video1]: ./output_images/project_video.mp4 "Video"
+[videoimg1]: ./output_images/snapshot_video1.png "Video Snapshot1"
+[videoimg2]: ./output_images/snapshot_video1.png "Video Snapshot2"
+[videoimg3]: ./output_images/snapshot_video1.png "Video Snapshot3"
+[videoimg4]: ./output_images/snapshot_video1.png "Video Snapshot4"
+[videoimg5]: ./output_images/snapshot_video1.png "Video Snapshot5"
+
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
 
@@ -110,6 +120,14 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 ![alt text][image5]
 
+#### 7. Output pipeline from P2.ipynb for the eight image smaples looks like below
+
+First 4 images
+![alt text][image7]
+
+Next 4
+![alt text][image8]
+
 ---
 
 ### Pipeline (video)
@@ -117,6 +135,14 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
 Here's a [link to my video result](./project_video.mp4)
+
+Samples of video output snapshot are below:
+
+![alt text][videoimg1]
+![alt text][videoimg2]
+![alt text][videoimg3]
+![alt text][videoimg4]
+![alt text][videoimg5]
 
 ---
 
