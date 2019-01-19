@@ -38,15 +38,13 @@
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
 
-### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
+### rubric points covered below in the writeup.  
 
 ---
 
 ### Writeup / README
 
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Advanced-Lane-Lines/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
-
-You're reading it!
+This document!
 
 ### Camera Calibration
 
@@ -111,11 +109,11 @@ src = np.float32(
     ])  
 
 dst = np.float32(
-                [ [image_size[1]//4, 0],
-                  [image_size[1]//1.108,0],
-                  [image_size[1]//1.18, image_size[0]],
-                  [image_size[1]//4, image_size[0]]
-                ])
+    [ [image_size[1]//4, 0],
+      [image_size[1]//1.108,0],
+      [image_size[1]//1.18, image_size[0]],
+      [image_size[1]//4, image_size[0]]
+    ])
 
 ```
                   
@@ -133,7 +131,8 @@ I verified that my perspective transform was working as expected by drawing the 
 ![alt text][imageA]
 ![alt text][imageB]
 
-Continuing with the example image in the pipeline, the perspective view on the image is below:
+
+Continuing with the example from the start of this writeup, the perspective view on the binary masked image is as:
 ![alt text][image3]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
