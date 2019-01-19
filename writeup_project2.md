@@ -25,6 +25,9 @@
 [image7]: ./output_images/P2_imageout_4.png "P2.ipynb images 1-4"
 [image8]: ./output_images/P2_imageout_8.png "P2.ipynb images 5-8"
 
+[imageA]: ./output_images/straight_lines1.jpg              "straight line image"
+[imageB]: ./output_images/perspec_warp_straight_lines1.jpg "Prespective straight line image"
+
 [video1]: ./output_images/project_video.mp4 "Video"
 [videoimg1]: ./output_images/snapshot_video1.png "Video Snapshot1"
 [videoimg2]: ./output_images/snapshot_video2.png "Video Snapshot2"
@@ -99,6 +102,7 @@ The code for my perspective transform is in `P2.ipynb` file, cell 7, function: `
 The `bird_eye_view_transform()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
 ```python
+
 src = np.float32(
     [ [image_size[1]//2.3, image_size[0]//2 + 100],
       [image_size[1]//1.6, image_size[0]//2 + 100],
@@ -106,6 +110,12 @@ src = np.float32(
       [0, image_size[0]]
     ])  
 
+dst = np.float32(
+                [ [image_size[1]//4, 0],
+                  [image_size[1]//1.108,0],
+                  [image_size[1]//1.18, image_size[0]],
+                  [image_size[1]//4, image_size[0]]
+                ])
 
 ```
                   
@@ -120,21 +130,43 @@ This resulted in the following source and destination points:
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
+![alt text][imageA]
+![alt text][imageB]
+
+Continuing with the example image in the pipeline, the perspective view on the image is below:
 ![alt text][image3]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+I used a global state to tack the left and right lane polynomials. Initially the polynomials are empty and hence
+a search from scratch is done using the histogram based approach to indetify lane starting points and then a 
+sliding window approach to track high pixel density going from bottom of the image to the top. 
+
+If the pipeline misses to find a polynomial or in case of other errors, the pipelines sets the global polynomials
+to empty and triggers a search for lanes from the scratch.
+
+The code for the functionality is in cell 8 in the following functions:
+`fit_polynomial()` is the entry point function which decide (based on global polynomials being set or not) to trigger
+a lane search using sliding windows and historgram or to propopagate around the already known polynomial from the last
+frame. In both cases the gloabl lane are updated with the new polynomials.
+
+Example lanes from the test image.
 
 ![alt text][image4]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+Mean radius of curvature for the two lanes (at the bottom point in the image) is in `P2.ipynb` function: `measure_curvature_real()`. Meters per pixel in x and y direction are used as in the lesson videos:
+
+`ym_per_pix = 30/720 # meters per pixel in y dimension`
+`xm_per_pix = 3.7/700 # meters per pixel in x dimension`
+
+Vehicle position is determined in the function: `measure_vehicle_pos()` assuming the camera is in the center and using the known x points for the bottom points on the lane (maximum y value of 720 in this example)
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+Final output is generated as specified in the tips for the project. This is done in function : `unwarp()`:
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+Output of the test image is shown below.
 
 ![alt text][image5]
 
@@ -168,4 +200,14 @@ Samples of video output snapshot are below:
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+Project video is working fine, but to be more robust I need to experiment more with the color spaces and increase the robustness of the binary image to shadow and dark grooves in the asphalt.
+
+Frame to frame filtering for curvature and vehicle position change can be used to limit sudden jumps in lane position.
+
+In the hard challenge video lanes are lost when vehicle makes sharp turns. `vertices` variable used to mask the image for lane pixels can be oriented towards the lane curvature to look for lanes in the correct position in the image when vehicle is making sharp turns
+
+
+
+
+
+
