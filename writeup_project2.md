@@ -1,13 +1,8 @@
-## Writeup Template
+## Writeup Project 2 - Advanced Lane Finding Project
 
-### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+### Goals of this project are as follows:
 
 ---
-
-**Advanced Lane Finding Project**
-
-The goals / steps of this project are the following:
-
 * Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
 * Apply a distortion correction to raw images.
 * Use color transforms, gradients, etc., to create a thresholded binary image.
@@ -21,7 +16,7 @@ The goals / steps of this project are the following:
 
 [image0]: ./output_images/test4.jpg                  "Provided Image"
 [image1]: ./output_images/undistorted_test4.jpg      "Undistorted"
-[image2]: ./output_images/threshold_test4.jpg        "Binary Thresholded"
+[image2]: ./output_images/camera_cal_test.jpg        "Camera calibration"
 [image3]: ./output_images/perspec_warp_test4.jpg     "Perspective Transform"
 [image4]: ./output_images/lanes_test4.jpg            "Lanes"
 [image5]: ./output_images/warp_back_test4.jpg        "Final"
@@ -54,31 +49,54 @@ You're reading it!
 
 #### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
 
-The code for this step is contained in the first code cell of the IPython notebook located in "./examples/example.ipynb" (or in lines # through # of the file called `some_file.py`).  
+The code for this step is contained in the first code cell of the IPython notebook located in "./P2.ipynb" cell 1 and 2. Cell 1 is the boilerplate code using provided chessboard images and comparing to a known chessboard image of 9 by 6 grid. Once the object and image points were determined, I checked all the provided images for dimension and found that image camera_cal/calibration7.jpg which is (721, 1281, 3) and all other images are (720, 1280, 3). As the project images and video are all 1280 by 720, I used a 1280 by 720 image size to determine the camera matrix and distortion parameter using `cv2.calibrateCamera()`.    
 
-I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
+Image points are the identified x and y pixel position of the inner corners of the 9 by 6 chessboard. object points are known with z=0 (assuming the chessboard is in a flat surface in the x-y place at z=0). image points from all the given images are used to calibrate against the known object points.
+    
+![alt text][image2]
 
-I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
-
-![alt text][image0]
 
 ### Pipeline (single images)
+
+![alt text][image0]
 
 #### 1. Provide an example of a distortion-corrected image.
 
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images shown above. The result of undistored image is shown below:
+
+Given the distortion parameters and camera matrix from the calibration step (for a given size of image, in this case 1280 by 720), `cv2.undistort()` is used to generate the undistorted version of the image.
+
 ![alt text][image1]
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `P2.py`).  Here's an example of my output for this step.  
+I used a combination of color and gradient thresholds to generate a binary image (In file `P2.py`, function binary_pipeline, cell 6). I have used the following thresholding:
 
-Same image shown with the binary mask applied to extract the area with lane information
+Gradient based thresholding (using sobel kernel size 9)
+- x gradient magnitude
+- Y gradient magnitude
+- X-Y resultant gradient magnitude
+- direction of gradient 
+
+For color thresholding
+First I convered the image from BGR to HLS color space. 
+- s channel based threshold
+- l channel based threshold
+- h channel based threshold was taken out, needs more tweaking.
+
+Logic combining these thresholds is this:
+`((s_binary == 1) | ((gradx == 1) & (grady == 1) & (lightbinary == 1))) | ((mag_binary == 1) & (dir_binary == 1))`
+
+image shown with the binary thresholding applied and the polygonal mask overlaid to extract only lane lines as much as possible. I have used a slight variation on the trapezoid, with a notch at the bottom to take out any unwanted pixes between
+lanes. This also allows to get the histogram clean and towards truth.
+
 ![alt text][image6]
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform is in `P2.ipynb` file, cell 7, function: `bird_eye_view_transform()`
+
+The `bird_eye_view_transform()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
 ```python
 src = np.float32(
