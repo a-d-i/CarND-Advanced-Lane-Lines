@@ -16,7 +16,7 @@
 
 [image0]: ./output_images/test4.jpg                  "Provided Image"
 [image1]: ./output_images/undistorted_test4.jpg      "Undistorted"
-[image2]: ./output_images/camera_cal_test.jpg        "Camera calibration"
+[image2]: ./output_images/camera_calibration17.jpg   "Camera calibration"
 [image3]: ./output_images/perspec_warp_test4.jpg     "Perspective Transform"
 [image4]: ./output_images/lanes_test4.jpg            "Lanes"
 [image5]: ./output_images/warp_back_test4.jpg        "Final"
@@ -27,6 +27,9 @@
 
 [imageA]: ./output_images/straight_lines1.jpg              "straight line image"
 [imageB]: ./output_images/perspec_warp_straight_lines1.jpg "Prespective straight line image"
+
+[imageCameraB]: ./output_images/camera_calibration1.jpg          "Distorted chessboard"
+[imageCameraC]: ./output_images/undist_camera_calibration1.jpg   "Undistorted chessboard"
 
 [video1]: ./output_images/project_video.mp4 "Video"
 [videoimg1]: ./output_images/snapshot_video1.png "Video Snapshot1"
@@ -54,8 +57,16 @@ The code for this step is contained in the first code cell of the IPython notebo
 
 Image points are the identified x and y pixel position of the inner corners of the 9 by 6 chessboard. object points are known with z=0 (assuming the chessboard is in a flat surface in the x-y place at z=0). image points from all the given images are used to calibrate against the known object points.
     
+Camera calibration, example image shown with identified imagepoints of a chessboard.
 ![alt text][image2]
 
+After calibration using all images, example of undistorting a chessboard image.
+
+Distorted image:
+![alt text][imageCameraB]
+
+Image after distortion removal (undistortion):
+![alt text][imageCameraC]
 
 ### Pipeline (single images)
 
