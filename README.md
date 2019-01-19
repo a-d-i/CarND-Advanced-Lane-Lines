@@ -22,9 +22,10 @@ The images for camera calibration are stored in the folder called `camera_cal`. 
 
 One complete pipeline output for test image is saved in `output_images`, and includes a description in the writeup for the project of what each image shows.    For the video called `project_video.mp4`, the resulting video output is in `output_images/project_video.mp4`. Sample snapshots of video output
 
-![alt text][videoimg1]
-![alt text][videoimg2]
-![alt text][videoimg3]
-![alt text][videoimg4]
-![alt text][videoimg5]
+![Lanes Image](./output_images/snapshot_video1.png)
+![Lanes Image](./output_images/snapshot_video2.png)
+![Lanes Image](./output_images/snapshot_video3.png)
+![Lanes Image](./output_images/snapshot_video4.png)
+![Lanes Image](./output_images/snapshot_video5.png)
+
 

@@ -32,10 +32,10 @@ The goals / steps of this project are the following:
 
 [video1]: ./output_images/project_video.mp4 "Video"
 [videoimg1]: ./output_images/snapshot_video1.png "Video Snapshot1"
-[videoimg2]: ./output_images/snapshot_video1.png "Video Snapshot2"
-[videoimg3]: ./output_images/snapshot_video1.png "Video Snapshot3"
-[videoimg4]: ./output_images/snapshot_video1.png "Video Snapshot4"
-[videoimg5]: ./output_images/snapshot_video1.png "Video Snapshot5"
+[videoimg2]: ./output_images/snapshot_video2.png "Video Snapshot2"
+[videoimg3]: ./output_images/snapshot_video3.png "Video Snapshot3"
+[videoimg4]: ./output_images/snapshot_video4.png "Video Snapshot4"
+[videoimg5]: ./output_images/snapshot_video5.png "Video Snapshot5"
 
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
