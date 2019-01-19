@@ -19,7 +19,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image0]: ./output_images/test1.jpg                  "Provided Image"
+[image0]: ./output_images/test4.jpg                  "Provided Image"
 [image1]: ./output_images/undistorted_test4.jpg      "Undistorted"
 [image2]: ./output_images/threshold_test4.jpg        "Binary Thresholded"
 [image3]: ./output_images/perspec_warp_test4.jpg     "Perspective Transform"
@@ -62,8 +62,6 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
 I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `P2.py`).  Here's an example of my output for this step.  
-
-![alt text][image2]
 
 Same image shown with the binary mask applied to extract the area with lane information
 ![alt text][image6]
