@@ -29,7 +29,7 @@
 [imageB]: ./output_images/perspec_warp_straight_lines1.jpg "Prespective straight line image"
 
 [imageCameraB]: ./output_images/camera_calibration1.jpg          "Distorted chessboard"
-[imageCameraC]: ./output_images/undist_camera_calibration1.jpg   "Undistorted chessboard"
+[imageCameraC]: ./output_images/undist_calibration1.jpg   "Undistorted chessboard"
 
 [video1]: ./output_images/project_video.mp4 "Video"
 [videoimg1]: ./output_images/snapshot_video1.png "Video Snapshot1"
